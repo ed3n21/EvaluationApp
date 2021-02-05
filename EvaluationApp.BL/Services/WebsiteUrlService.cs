@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EvaluationApp.BL.ModelsBL;
 using EvaluationApp.DAL.Models;
+using EvaluationApp.DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +13,39 @@ namespace EvaluationApp.BL.Services
     public class WebsiteUrlService
     {
         private readonly IMapper _mapper;
+        private readonly GenericRepository<WebsiteUrl> _repository;
 
-        public WebsiteUrlService(IMapper mapper)
+        public WebsiteUrlService(IMapper mapper, GenericRepository<WebsiteUrl> repository)
         {
             _mapper = mapper;
+            _repository = new GenericRepository<WebsiteUrl>();
         }
 
-        public WebsiteUrl Map(WebsiteUrlBL model)
+        public void Create(WebsiteUrlBL modelBL)
         {
-            return _mapper.Map<WebsiteUrl>(model);
+            var model = _mapper.Map<WebsiteUrl>(modelBL);
+            _repository.Create(model);
         }
 
-        public WebsiteUrlBL Map(WebsiteUrl model)
+        public void Delete(int id)
         {
-            return _mapper.Map<WebsiteUrlBL>(model);
+            _repository.Delete(id);
         }
 
-        public IEnumerable<WebsiteUrl> Map(IEnumerable<WebsiteUrlBL> models)
+        public void Edit(WebsiteUrlBL modelBL)
         {
-            return _mapper.Map<IEnumerable<WebsiteUrl>>(models);
+            var model = _mapper.Map<WebsiteUrl>(modelBL);
+            _repository.Edit(model);
         }
 
-        public IEnumerable<WebsiteUrlBL> Map(IEnumerable<WebsiteUrl> models)
+        public WebsiteUrlBL Get(int id)
         {
-            return _mapper.Map<IEnumerable<WebsiteUrlBL>>(models);
+            return _mapper.Map<WebsiteUrlBL>(_repository.Get(id));
+        }
+
+        public IEnumerable<WebsiteUrlBL> Get(string include = "") // include - for loading nested objects data
+        {
+            return _mapper.Map<IEnumerable<WebsiteUrlBL>>(_repository.Get(include));
         }
     }
 }
