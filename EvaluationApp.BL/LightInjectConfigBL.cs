@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EvaluationApp.BL
 {
-    class LightInjectConfigBL
+    public class LightInjectConfigBL
     {
         public static ServiceContainer Configurate(ServiceContainer container)
         {

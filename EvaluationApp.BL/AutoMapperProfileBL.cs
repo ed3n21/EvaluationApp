@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EvaluationApp.BL
 {
-    class AutoMapperProfileBL : Profile
+    public class AutoMapperProfileBL : Profile
     {
         public AutoMapperProfileBL()
         {

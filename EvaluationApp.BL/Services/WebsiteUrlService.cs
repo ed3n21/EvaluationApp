@@ -13,9 +13,9 @@ namespace EvaluationApp.BL.Services
     public class WebsiteUrlService
     {
         private readonly IMapper _mapper;
-        private readonly GenericRepository<WebsiteUrl> _repository;
+        private readonly IGenericRepository<WebsiteUrl> _repository;
 
-        public WebsiteUrlService(IMapper mapper, GenericRepository<WebsiteUrl> repository)
+        public WebsiteUrlService(IMapper mapper, IGenericRepository<WebsiteUrl> repository)
         {
             _mapper = mapper;
             _repository = repository;

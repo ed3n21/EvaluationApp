@@ -13,9 +13,9 @@ namespace EvaluationApp.BL.Services
     public class UrlResponseStatService
     {
         private readonly IMapper _mapper;
-        private readonly GenericRepository<UrlResponseStat> _repository;
+        private readonly IGenericRepository<UrlResponseStat> _repository;
 
-        public UrlResponseStatService(IMapper mapper, GenericRepository<UrlResponseStat> repository)
+        public UrlResponseStatService(IMapper mapper, IGenericRepository<UrlResponseStat> repository)
         {
             _mapper = mapper;
             _repository = repository;
