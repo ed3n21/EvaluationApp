@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EvaluationApp.DAL.Models
+namespace EvaluationApp.BL.ModelsBL
 {
-    public class UrlResponseStat
+    public class UrlResponseStatBL
     {
         public int Id { get; set; }
         public string Url { get; set; }
@@ -14,6 +14,6 @@ namespace EvaluationApp.DAL.Models
         public int ResponseTimeMs { get; set; }
 
         public int WebsiteUrlId { get; set; }
-        public WebsiteUrl WebsiteUrl { get; set; }
+        public WebsiteUrlBL WebsiteUrl { get; set; }
     }
 }
