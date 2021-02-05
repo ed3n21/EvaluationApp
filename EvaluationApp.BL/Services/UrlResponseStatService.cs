@@ -18,7 +18,7 @@ namespace EvaluationApp.BL.Services
         public UrlResponseStatService(IMapper mapper, GenericRepository<UrlResponseStat> repository)
         {
             _mapper = mapper;
-            _repository = new GenericRepository<UrlResponseStat>();
+            _repository = repository;
         }
 
         public void Create(UrlResponseStatBL modelBL)

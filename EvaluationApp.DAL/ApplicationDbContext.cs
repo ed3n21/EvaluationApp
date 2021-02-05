@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EvaluationApp.DAL
 {
-    class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext() : base("DefaultConnection")
         {

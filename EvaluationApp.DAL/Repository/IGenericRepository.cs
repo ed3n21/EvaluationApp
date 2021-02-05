@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvaluationApp.DAL.Repository
 {
-    interface IGenericRepository<ModelDAL> where ModelDAL : class
+    public interface IGenericRepository<ModelDAL> where ModelDAL : class
     {
         ModelDAL Get(int id);
         IEnumerable<ModelDAL> Get(string include = "");

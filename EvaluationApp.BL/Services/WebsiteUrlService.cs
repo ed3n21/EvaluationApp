@@ -18,7 +18,7 @@ namespace EvaluationApp.BL.Services
         public WebsiteUrlService(IMapper mapper, GenericRepository<WebsiteUrl> repository)
         {
             _mapper = mapper;
-            _repository = new GenericRepository<WebsiteUrl>();
+            _repository = repository;
         }
 
         public void Create(WebsiteUrlBL modelBL)
