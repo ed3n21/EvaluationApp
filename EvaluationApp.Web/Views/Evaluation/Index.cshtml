@@ -1,0 +1,21 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<form method="get">
+    <label for="site">URL</label>
+    <input type="text" name="site" />
+    <input type="submit" name="name" value="Create sitemap" />   
+</form>
+
+@if (ViewBag.Sitemap != null)
+{
+    foreach(string url in ViewBag.Sitemap)
+    {
+        <p>@url</p>
+    }
+}
