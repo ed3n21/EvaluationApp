@@ -12,5 +12,7 @@ namespace EvaluationApp.Web.Models
         [Required]
         [StringLength(300, MinimumLength = 5)]
         public string Url { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DateCreated { get; set; }
     }
 }

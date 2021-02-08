@@ -1,4 +1,5 @@
-﻿@model string
+﻿@using EvaluationApp.Web.Models
+@model string
 
 @{
     ViewBag.Title = "Index";
@@ -14,8 +15,10 @@
 
 @if (ViewBag.Sitemap != null)
 {
-    foreach(string url in ViewBag.Sitemap)
+    foreach(UrlResponseStatModel url in ViewBag.Sitemap)
     {
-        <p>@url</p>
+        <span>@url.Url</span>
+        <span>@url.ResponseTimeMs</span>
+        <br />
     }
 }

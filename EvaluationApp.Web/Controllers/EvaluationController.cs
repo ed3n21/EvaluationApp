@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using EvaluationApp.BL.ModelsBL;
 using EvaluationApp.BL.Services;
 using EvaluationApp.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
@@ -31,15 +34,37 @@ namespace EvaluationApp.Web.Controllers
             }
             else
             {
-                XmlTextReader doc = new XmlTextReader(site + "/sitemap.xml");
-                List<string> urls = new List<string>();
+                // TODO: implement The Single Responsibility Principle
+                WebsiteUrlModel website = new WebsiteUrlModel { Url = site, DateCreated = DateTime.Now };
+                int websiteId = _websiteUrlService.Create(_mapper.Map<WebsiteUrlBL>(website));
+                string urlString = site + "/sitemap.xml";
+
                 List<UrlResponseStatModel> urls = new List<UrlResponseStatModel>();
-                while (doc.Read())
+
+                XmlTextReader reader = new XmlTextReader(urlString);
+                while (reader.Read())
                 {
-                    if (doc.NodeType == XmlNodeType.Text)
+                    if (reader.NodeType == XmlNodeType.Text)
                     {
-                        UrlResponseStatModel = new UrlResponseStatModel { Date = DateTime.Now, WebsiteUrlId}
-                        urls.Add(doc.Value.ToString());
+                        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlString);
+
+                        Stopwatch timer = new Stopwatch();
+                        timer.Start();
+
+                        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                        timer.Stop();
+
+                        TimeSpan timeTaken = timer.Elapsed;
+
+                        UrlResponseStatModel model = new UrlResponseStatModel
+                        {
+                            Date = DateTime.Now,
+                            WebsiteUrlId = websiteId,
+                            Url = reader.Value.ToString(),
+                            ResponseTimeMs = (int)timeTaken.TotalMilliseconds
+                        };
+                        urls.Add(model);
                     }
                 }
                 ViewBag.Sitemap = urls;

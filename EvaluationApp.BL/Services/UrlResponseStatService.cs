@@ -21,10 +21,10 @@ namespace EvaluationApp.BL.Services
             _repository = repository;
         }
 
-        public void Create(UrlResponseStatBL modelBL)
+        public int Create(UrlResponseStatBL modelBL)
         {
             var model = _mapper.Map<UrlResponseStat>(modelBL);
-            _repository.Create(model);
+            return _repository.Create(model);
         }
 
         public void Delete(int id)
