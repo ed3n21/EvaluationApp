@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EvaluationApp.BL.Services;
+using EvaluationApp.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,12 @@ namespace EvaluationApp.Web.Controllers
             {
                 XmlTextReader doc = new XmlTextReader(site + "/sitemap.xml");
                 List<string> urls = new List<string>();
+                List<UrlResponseStatModel> urls = new List<UrlResponseStatModel>();
                 while (doc.Read())
                 {
                     if (doc.NodeType == XmlNodeType.Text)
                     {
+                        UrlResponseStatModel = new UrlResponseStatModel { Date = DateTime.Now, WebsiteUrlId}
                         urls.Add(doc.Value.ToString());
                     }
                 }

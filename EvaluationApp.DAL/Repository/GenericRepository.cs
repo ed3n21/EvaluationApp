@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EvaluationApp.DAL.ModelsDAL;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace EvaluationApp.DAL.Repository
 {
     public class GenericRepository<ModelDAL> : IDisposable, IGenericRepository<ModelDAL>
-        where ModelDAL : class
+        where ModelDAL : class, IDataEntity
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<ModelDAL> _dbSet;
@@ -19,10 +20,12 @@ namespace EvaluationApp.DAL.Repository
             _dbSet = _context.Set<ModelDAL>();
         }
 
-        public void Create(ModelDAL model)
+        public int Create(ModelDAL model)
         {
             _dbSet.Add(model);
             _context.SaveChanges();
+
+            return model.Id;
         }
 
         public void Edit(ModelDAL model)
